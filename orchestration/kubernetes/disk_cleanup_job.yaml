@@ -1,0 +1,14 @@
+# disk_cleanup_job.yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: disk-cleanup
+spec:
+  template:
+    spec:
+      containers:
+      - name: disk-cleanup
+        image: python:3.8
+        command: ["python", "clear_disk_space.py"]
+      restartPolicy: Never
+  backoffLimit: 2
