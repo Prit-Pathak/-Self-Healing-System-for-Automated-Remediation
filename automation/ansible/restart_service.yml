@@ -1,0 +1,12 @@
+# restart_service.yml
+- name: Restart failed service
+  hosts: all
+  tasks:
+    - name: Check service status
+      command: systemctl status apache2
+      register: service_status
+      ignore_errors: yes
+
+    - name: Restart service if failed
+      command: systemctl restart apache2
+      when: service_status.rc != 0
